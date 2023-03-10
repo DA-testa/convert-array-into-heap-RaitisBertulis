@@ -39,9 +39,9 @@ def main():
         assert len(data) == n
     elif "F" in cmd:
         nos = input("Faila nosaukums: ")
-        with open ("./tests/" + nos, 'r') as file:
+        with open (f"tests/{nos}") as file:
             n = int(file.readline())
-            data=list(map(int, input().split()))
+            data=list(map(int, file.readline().split()))
         # checks if lenght of data is the same as the said lenght
             assert len(data) == n
 
