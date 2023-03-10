@@ -3,12 +3,24 @@
 
 def build_heap(data):
     swaps = []
+    
     # TODO: Creat heap and heap sort
     # try to achieve  O(n) and not O(n2)
-
-
+    
+    n = len(data)
+    for i in range(n//2, -1, -1):
+        pasr = i
+        while 2 * pasr + 1 < n:
+            ind = 2 * pasr + 1
+            if ind + 1 < n and data[ind + 1] < data[ind]:
+                ind = ind + 1
+            if data[pasr] > data[ind]:
+                swaps.append((pasr, ind))
+                data[pasr], data[ind] = data[ind], data[pasr]
+                pasr = ind
+            else:
+                break
     return swaps
-
 
 def main():
     
@@ -18,11 +30,20 @@ def main():
 
 
     # input from keyboard
-    n = int(input())
-    data = list(map(int, input().split()))
-
-    # checks if lenght of data is the same as the said lenght
-    assert len(data) == n
+    
+    cmd = input("Izvelies teksta ievadisanas veidu (I vai F): ")
+    if "I" in cmd:
+        n = int(input("Ievadi skaitu: "))
+        data = list(map(int, input("Ievadi elementus: ").split()))
+        # checks if lenght of data is the same as the said lenght
+        assert len(data) == n
+    elif "F" in cmd:
+        nos = input("Faila nosaukums: ")
+        with open (f"test/{nos}") as file:
+            n = int(file.readline())
+            data=list(map(int, input().split()))
+        # checks if lenght of data is the same as the said lenght
+            assert len(data) == n
 
     # calls function to assess the data 
     # and give back all swaps
